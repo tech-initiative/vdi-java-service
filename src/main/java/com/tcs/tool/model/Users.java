@@ -140,7 +140,7 @@ public class Users {
 		this.isActive = isActive;
 	}
 	
-	@Column(name="isAdmin")
+	@Column(name="is_admin")
 	public boolean getIsAdmin() {
 		return isAdmin;
 	}

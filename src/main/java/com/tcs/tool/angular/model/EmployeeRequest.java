@@ -1,7 +1,10 @@
 package com.tcs.tool.angular.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class EmployeeRequest {
 
+	@JsonProperty("tcs_employee_id")
 	private String employeeId;
 	private String password;
 	private boolean isAdmin;
