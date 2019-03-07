@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tcs.tool.model.Account;
 import com.tcs.tool.model.Users;
-import com.tcs.tool.service.EmployeeService;
+import com.tcs.tool.service.VdiCommonService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -22,7 +22,7 @@ import com.tcs.tool.service.EmployeeService;
 public class ReportController {
 	
 	@Autowired
-	private EmployeeService employeeservice;
+	private VdiCommonService employeeservice;
 	
 	@GetMapping("/accounts")
 	public List<Account> listAccount() {

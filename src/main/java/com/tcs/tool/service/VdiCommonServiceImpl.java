@@ -8,23 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tcs.tool.angular.model.EmployeeRequest;
-import com.tcs.tool.dao.EmployeeDao;
+import com.tcs.tool.dao.VdiCommonDao;
 import com.tcs.tool.model.Account;
-import com.tcs.tool.model.Employee;
 import com.tcs.tool.model.Users;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public class VdiCommonServiceImpl implements VdiCommonService {
 
 	@Autowired
-	EmployeeDao employeeDao;
+	VdiCommonDao employeeDao;
 	
-	@Override
-	public List<Employee> findAll() {
-		// TODO Auto-generated method stub
-		return employeeDao.findAllEmployee();
-	}
-
 	@Override
 	public List<Account> findAllAccount() {
 		// TODO Auto-generated method stub

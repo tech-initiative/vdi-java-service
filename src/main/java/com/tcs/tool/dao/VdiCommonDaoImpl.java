@@ -9,29 +9,18 @@ import org.springframework.stereotype.Repository;
 
 import com.tcs.tool.angular.model.EmployeeRequest;
 import com.tcs.tool.model.Account;
-import com.tcs.tool.model.Employee;
 import com.tcs.tool.model.Users;
 import com.tcs.tool.repository.AccountRepository;
-import com.tcs.tool.repository.EmployeeRepository;
 import com.tcs.tool.repository.UserRepository;
 
 @Repository
-public class EmployeeDaoImpl implements EmployeeDao {
-
-	@Autowired
-	private EmployeeRepository employeeRepository;
+public class VdiCommonDaoImpl implements VdiCommonDao {
 
 	@Autowired
 	private AccountRepository accountRepository;
 
 	@Autowired
 	private UserRepository userRepository;
-
-	@Override
-	public List<Employee> findAllEmployee() {
-		// TODO Auto-generated method stub
-		return employeeRepository.findAll();
-	}
 
 	@Override
 	public List<Account> findAllAccount() {

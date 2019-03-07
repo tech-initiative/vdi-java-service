@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tcs.tool.angular.model.EmployeeRequest;
 import com.tcs.tool.model.Users;
-import com.tcs.tool.service.EmployeeService;
+import com.tcs.tool.service.VdiCommonService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -19,7 +19,7 @@ import com.tcs.tool.service.EmployeeService;
 public class LoginController {
 
 	@Autowired
-	private EmployeeService employeeservice;
+	private VdiCommonService employeeservice;
 	
 	@PostMapping("/login")
 	public Users login(@Valid @RequestBody EmployeeRequest employeeRequest) {

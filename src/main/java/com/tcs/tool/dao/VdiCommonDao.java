@@ -6,11 +6,9 @@ import javax.validation.Valid;
 
 import com.tcs.tool.angular.model.EmployeeRequest;
 import com.tcs.tool.model.Account;
-import com.tcs.tool.model.Employee;
 import com.tcs.tool.model.Users;
 
-public interface EmployeeDao {
-	List<Employee> findAllEmployee();
+public interface VdiCommonDao {
 	List<Account> findAllAccount();
 	Account addAccount(Account account);
 	Users findUserByCredential(EmployeeRequest employeeRequest);
