@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.tcs.tool.angular.model.EmployeeRequest;
 import com.tcs.tool.dao.VdiCommonDao;
+import com.tcs.tool.exception.ResourceNotFoundException;
 import com.tcs.tool.model.Account;
 import com.tcs.tool.model.Users;
 
@@ -31,7 +32,7 @@ public class VdiCommonServiceImpl implements VdiCommonService {
 	}
 
 	@Override
-	public Users getUserByCredential(EmployeeRequest employeeRequest) {
+	public Users getUserByCredential(EmployeeRequest employeeRequest) throws ResourceNotFoundException {
 		// TODO Auto-generated method stub
 		return employeeDao.findUserByCredential(employeeRequest);
 	}

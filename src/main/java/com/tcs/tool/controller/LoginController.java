@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tcs.tool.angular.model.EmployeeRequest;
+import com.tcs.tool.exception.ResourceNotFoundException;
 import com.tcs.tool.model.Users;
 import com.tcs.tool.service.VdiCommonService;
 
@@ -22,7 +23,7 @@ public class LoginController {
 	private VdiCommonService employeeservice;
 	
 	@PostMapping("/login")
-	public Users login(@Valid @RequestBody EmployeeRequest employeeRequest) {
+	public Users login(@Valid @RequestBody EmployeeRequest employeeRequest) throws ResourceNotFoundException {
 		//validateRequest(employeeRequest);
 		Users user = employeeservice.getUserByCredential(employeeRequest);
 		return user;

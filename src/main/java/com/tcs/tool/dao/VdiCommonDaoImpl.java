@@ -1,6 +1,7 @@
 package com.tcs.tool.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.tcs.tool.angular.model.EmployeeRequest;
+import com.tcs.tool.exception.ResourceNotFoundException;
 import com.tcs.tool.model.Account;
 import com.tcs.tool.model.Users;
 import com.tcs.tool.repository.AccountRepository;
@@ -35,10 +37,12 @@ public class VdiCommonDaoImpl implements VdiCommonDao {
 	}
 
 	@Override
-	public Users findUserByCredential(EmployeeRequest employeeRequest) {
+	public Users findUserByCredential(EmployeeRequest employeeRequest) throws ResourceNotFoundException {
 		// TODO Auto-generated method stub
-		return userRepository.findByEmployeeCredential(employeeRequest.getEmployeeId(), employeeRequest.getPassword(),
+		Users findByEmployeeCredential = userRepository.findByEmployeeCredential(employeeRequest.getEmployeeId(), employeeRequest.getPassword(),
 				employeeRequest.getIsAdmin());
+		
+		return Optional.ofNullable(findByEmployeeCredential).orElseThrow(() ->new ResourceNotFoundException("Invalid credential"));
 	}
 
 	@Override

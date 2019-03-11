@@ -25,6 +25,7 @@ public class Users {
 	private Date registrationDate;
 	private Date last_login_time;
 	private String status;
+	private boolean role;
 	private boolean isActive;
 	private boolean isAdmin;
 
@@ -149,6 +150,15 @@ public class Users {
 		this.isAdmin = isAdmin;
 	}
 
+	@Column(name="role")
+	public boolean getRole() {
+		return role;
+	}
+
+	public void setRole(boolean role) {
+		this.role = role;
+	}
+	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email

@@ -23,8 +23,8 @@ public class Account {
 	private String locationId;
 	private String status;
 	private boolean isActive;
-
-	List<Project> projectList = new ArrayList<Project>();
+	private List<Project> projectList = new ArrayList<Project>();
+	private List<Users> accountManager;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -82,10 +82,21 @@ public class Account {
 		this.projectList = projectList;
 	}
 
+	@OneToMany(cascade = CascadeType.ALL)
+	//@JoinTable(name = "Users", joinColumns = { @JoinColumn(name = "id") })
+	public List<Users> getAccountManager() {
+		return accountManager;
+	}
+	
+	public void setAccountManager(List<Users> accountManager) {
+		this.accountManager = accountManager;
+	}
+
 	@Override
 	public String toString() {
 		return "Account [id=" + id + ", name=" + name + ", locationId=" + locationId + ", status=" + status
 				+ ", isActive=" + isActive + "]";
 	}
+
 
 }
