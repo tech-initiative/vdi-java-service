@@ -13,7 +13,7 @@ import com.tcs.tool.model.Users;
 public interface VdiCommonDao {
 	List<Account> findAllAccount();
 	Account addAccount(Account account);
-	Users findUserByCredential(EmployeeRequest employeeRequest) throws ResourceNotFoundException;
+	Users findUserByCredential(EmployeeRequest employeeRequest);
 	Users addUser(@Valid Users user);
 	Project addProject(@Valid Project project);
 	Project editProject(@Valid Project project);

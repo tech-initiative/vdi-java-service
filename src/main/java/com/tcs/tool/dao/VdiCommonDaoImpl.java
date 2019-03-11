@@ -41,12 +41,10 @@ public class VdiCommonDaoImpl implements VdiCommonDao {
 	}
 
 	@Override
-	public Users findUserByCredential(EmployeeRequest employeeRequest) throws ResourceNotFoundException {
+	public Users findUserByCredential(EmployeeRequest employeeRequest) {
 		// TODO Auto-generated method stub
-		Users findByEmployeeCredential = userRepository.findByEmployeeCredential(employeeRequest.getEmployeeId(), employeeRequest.getPassword(),
+		return userRepository.findByEmployeeCredential(employeeRequest.getEmployeeId(), employeeRequest.getPassword(),
 				employeeRequest.getIsAdmin());
-		
-		return Optional.ofNullable(findByEmployeeCredential).orElseThrow(() ->new ResourceNotFoundException("Invalid credential"));
 	}
 
 	@Override

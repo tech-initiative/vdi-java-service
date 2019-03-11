@@ -33,7 +33,7 @@ public class VdiCommonServiceImpl implements VdiCommonService {
 	}
 
 	@Override
-	public Users getUserByCredential(EmployeeRequest employeeRequest) throws ResourceNotFoundException {
+	public Users getUserByCredential(EmployeeRequest employeeRequest) {
 		// TODO Auto-generated method stub
 		return employeeDao.findUserByCredential(employeeRequest);
 	}

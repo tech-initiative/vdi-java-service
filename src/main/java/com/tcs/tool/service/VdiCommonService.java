@@ -16,7 +16,7 @@ public interface VdiCommonService {
 
 	Account addAccount(Account account);
 
-	Users getUserByCredential(@Valid EmployeeRequest employeeRequest) throws ResourceNotFoundException;
+	Users getUserByCredential(@Valid EmployeeRequest employeeRequest);
 
 	Users addUser(@Valid Users user);
 	
