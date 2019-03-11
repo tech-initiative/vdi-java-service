@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,8 +21,8 @@ public class Account {
 	private String locationId;
 	private String status;
 	private boolean isActive;
-	private List<Project> projectList = new ArrayList<Project>();
-	private List<Users> accountManager;
+
+	List<Project> projectList = new ArrayList<Project>();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -73,7 +71,7 @@ public class Account {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "project", joinColumns = { @JoinColumn(name = "projectId") })
+/*	@JoinTable(name = "project", joinColumns = { @JoinColumn(name = "projectId") })*/
 	public List<Project> getProjectList() {
 		return projectList;
 	}
@@ -82,21 +80,10 @@ public class Account {
 		this.projectList = projectList;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL)
-	//@JoinTable(name = "Users", joinColumns = { @JoinColumn(name = "id") })
-	public List<Users> getAccountManager() {
-		return accountManager;
-	}
-	
-	public void setAccountManager(List<Users> accountManager) {
-		this.accountManager = accountManager;
-	}
-
 	@Override
 	public String toString() {
 		return "Account [id=" + id + ", name=" + name + ", locationId=" + locationId + ", status=" + status
 				+ ", isActive=" + isActive + "]";
 	}
-
 
 }

@@ -1,10 +1,15 @@
 package com.tcs.tool.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +21,7 @@ public class Project {
 	private String accountId;
 	private String status;
 	private boolean isActive;
+	private List<Team> teamList = new ArrayList<Team>();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -63,10 +69,20 @@ public class Project {
 		this.isActive = isActive;
 	}
 
+	@OneToMany(cascade = CascadeType.ALL)
+	/*@JoinTable(name = "team", joinColumns = { @JoinColumn(name = "teamId") })*/
+	public List<Team> getTeamList() {
+		return teamList;
+	}
+
+	public void setTeamList(List<Team> teamList) {
+		this.teamList = teamList;
+	}
+
 	@Override
 	public String toString() {
-		return "Project [id=" + id + ", name=" + name + ", status=" + status + "," + " is_active=" + isActive
-				+ "account_id=" + accountId + "]";
+		return "Project [id=" + id + ", name=" + name + ", accountId=" + accountId + ", status=" + status
+				+ ", isActive=" + isActive + ", teamList=" + teamList + "]";
 	}
 
 }

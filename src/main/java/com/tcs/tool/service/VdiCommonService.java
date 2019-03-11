@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import com.tcs.tool.angular.model.EmployeeRequest;
 import com.tcs.tool.exception.ResourceNotFoundException;
 import com.tcs.tool.model.Account;
+import com.tcs.tool.model.Project;
 import com.tcs.tool.model.Users;
 
 public interface VdiCommonService {
@@ -18,4 +19,14 @@ public interface VdiCommonService {
 	Users getUserByCredential(@Valid EmployeeRequest employeeRequest) throws ResourceNotFoundException;
 
 	Users addUser(@Valid Users user);
+	
+	List<Project> getAllProjects();
+	
+	Project addProject(Project project);
+	
+	Project editProject(Project project);
+	
+	void deleteProject(Project project);
+
+	Project findById(Long projectId) throws ResourceNotFoundException;
 }
