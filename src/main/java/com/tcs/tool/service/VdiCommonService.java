@@ -30,5 +30,5 @@ public interface VdiCommonService {
 
 	Project findByProjectId(Long projectId) throws ResourceNotFoundException;
 
-	Users findByUserId(long employeeId) throws ResourceNotFoundException;
+	Users findByUserId(String employeeId) throws ResourceNotFoundException;
 }
