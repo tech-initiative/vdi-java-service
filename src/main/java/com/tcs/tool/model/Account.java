@@ -21,8 +21,8 @@ public class Account {
 	private String locationId;
 	private String status;
 	private boolean isActive;
-
-	List<Project> projectList = new ArrayList<Project>();
+	private List<Project> projectList = new ArrayList<Project>();
+	private List<Users> accountManager;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -78,6 +78,15 @@ public class Account {
 
 	public void setProjectList(List<Project> projectList) {
 		this.projectList = projectList;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL)
+	public List<Users> getAccountManager() {
+		return accountManager;
+	}
+	
+	public void setAccountManager(List<Users> accountManager) {
+		this.accountManager = accountManager;
 	}
 
 	@Override
