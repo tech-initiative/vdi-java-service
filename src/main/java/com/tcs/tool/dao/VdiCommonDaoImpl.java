@@ -90,7 +90,7 @@ public class VdiCommonDaoImpl implements VdiCommonDao {
 	}
 
 	@Override
-	public Users findByUserId(long employeeId) throws ResourceNotFoundException {
+	public Users findByUserId(String employeeId) throws ResourceNotFoundException {
 		return userRepository.findById(employeeId)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
 	}

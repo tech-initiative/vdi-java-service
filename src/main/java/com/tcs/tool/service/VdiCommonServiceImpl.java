@@ -70,7 +70,7 @@ public class VdiCommonServiceImpl implements VdiCommonService {
 	}
 
 	@Override
-	public Users findByUserId(long employeeId) throws ResourceNotFoundException {
+	public Users findByUserId(String employeeId) throws ResourceNotFoundException {
 		return vdiCommonDao.findByUserId(employeeId);
 	}
 
