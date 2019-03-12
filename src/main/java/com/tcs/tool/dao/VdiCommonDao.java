@@ -13,11 +13,12 @@ import com.tcs.tool.model.Users;
 public interface VdiCommonDao {
 	List<Account> findAllAccount();
 	Account addAccount(Account account);
-	Users findUserByCredential(EmployeeRequest employeeRequest);
+	Users findUserByCredential(EmployeeRequest employeeRequest) throws ResourceNotFoundException;
 	Users addUser(@Valid Users user);
 	Project addProject(@Valid Project project);
 	Project editProject(@Valid Project project);
 	void deleteProject(@Valid Project project);
 	List<Project> findAllProject();
-	Project findById(Long projectId) throws ResourceNotFoundException;
+	Project findByProjectId(Long projectId) throws ResourceNotFoundException;
+	Users findByUserId(long employeeId) throws ResourceNotFoundException;
 }

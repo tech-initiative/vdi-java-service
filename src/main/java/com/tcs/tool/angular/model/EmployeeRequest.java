@@ -5,14 +5,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class EmployeeRequest {
 
 	@JsonProperty("tcs_employee_id")
-	private String employeeId;
+	private long employeeId;
 	private String password;
+	@JsonProperty("is_admin")
 	private boolean isAdmin;
+	@JsonProperty("email_id")
+	private String emailId;
+	@JsonProperty("location_id")
+	private String locationId;
 	
-	public String getEmployeeId() {
+	public long getEmployeeId() {
 		return employeeId;
 	}
-	public void setEmployeeId(String employeeId) {
+	public void setEmployeeId(long employeeId) {
 		this.employeeId = employeeId;
 	}
 	public String getPassword() {
@@ -26,6 +31,18 @@ public class EmployeeRequest {
 	}
 	public void setIsAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+	public String getEmailId() {
+		return emailId;
+	}
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+	public String getLocationId() {
+		return locationId;
+	}
+	public void setLocationId(String locationId) {
+		this.locationId = locationId;
 	}
 	
 }

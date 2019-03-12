@@ -18,55 +18,60 @@ import com.tcs.tool.model.Users;
 public class VdiCommonServiceImpl implements VdiCommonService {
 
 	@Autowired
-	VdiCommonDao employeeDao;
+	VdiCommonDao vdiCommonDao;
 	
 	@Override
 	public List<Account> findAllAccount() {
 		// TODO Auto-generated method stub
-		return employeeDao.findAllAccount();
+		return vdiCommonDao.findAllAccount();
 	}
 
 	@Override
 	public Account addAccount(Account account) {
 		// TODO Auto-generated method stub
-		return employeeDao.addAccount(account);
+		return vdiCommonDao.addAccount(account);
 	}
 
 	@Override
-	public Users getUserByCredential(EmployeeRequest employeeRequest) {
+	public Users getUserByCredential(EmployeeRequest employeeRequest) throws ResourceNotFoundException {
 		// TODO Auto-generated method stub
-		return employeeDao.findUserByCredential(employeeRequest);
+		return vdiCommonDao.findUserByCredential(employeeRequest);
 	}
 
 	@Override
 	public Users addUser(@Valid Users user) {
 		// TODO Auto-generated method stub
-		return employeeDao.addUser(user);
+		return vdiCommonDao.addUser(user);
 	}
 
 	@Override
 	public Project addProject(Project project) {
-		return employeeDao.addProject(project);
+		return vdiCommonDao.addProject(project);
 	}
 
 	@Override
 	public List<Project> getAllProjects() {
-		return employeeDao.findAllProject();
+		return vdiCommonDao.findAllProject();
 	}
 
 	@Override
 	public Project editProject(Project project) {
-		return employeeDao.editProject(project);
+		return vdiCommonDao.editProject(project);
 	}
 
 	@Override
 	public void deleteProject(Project project) {
-		 employeeDao.deleteProject(project);
+		 vdiCommonDao.deleteProject(project);
 	}
 
 	@Override
-	public Project findById(Long projectId) throws ResourceNotFoundException {
-		return employeeDao.findById(projectId);
+	public Project findByProjectId(Long projectId) throws ResourceNotFoundException {
+		return vdiCommonDao.findByProjectId(projectId);
+	}
+
+	@Override
+	public Users findByUserId(long employeeId) throws ResourceNotFoundException {
+		return vdiCommonDao.findByUserId(employeeId);
 	}
 
 }

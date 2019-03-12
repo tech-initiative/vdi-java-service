@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tcs.tool.angular.model.EmployeeRequest;
 import com.tcs.tool.exception.ResourceNotFoundException;
 import com.tcs.tool.model.Account;
 import com.tcs.tool.model.Project;
@@ -43,6 +44,12 @@ public class ReportController {
 	public Users addUser(@Valid @RequestBody Users user){
 		return employeeservice.addUser(user);
 	}
+	
+	@GetMapping("/users")
+	public Users listUser(@Valid @RequestBody EmployeeRequest employeeRequest) throws ResourceNotFoundException{
+		return employeeservice.findByUserId(employeeRequest.getEmployeeId());
+	}
+	
 	@GetMapping("/projects")
 	public List<Project> listProject() {
 		return employeeservice.getAllProjects();
@@ -57,7 +64,7 @@ public class ReportController {
 	@PutMapping("/projects/{id}")
 	public <ResponseEntity> Project editProject(@PathVariable(value = "id") Long projectId,
 			@Valid @RequestBody Project projectDetails) throws ResourceNotFoundException {
-		Project project =  employeeservice.findById(projectId);
+		Project project =  employeeservice.findByProjectId(projectId);
 		project.setName(projectDetails.getName());
 		project.setAccountId(projectDetails.getAccountId());
 		project.setStatus(projectDetails.getStatus());
@@ -67,7 +74,7 @@ public class ReportController {
 	@DeleteMapping("/projects/{id}")
 	public Boolean deleteProject(@PathVariable(value = "id") Long projectId,
 			@Valid @RequestBody Project projectDetails) throws ResourceNotFoundException {
-		Project project =  employeeservice.findById(projectId);
+		Project project =  employeeservice.findByProjectId(projectId);
 		employeeservice.deleteProject(project);
 		return true;
 	}

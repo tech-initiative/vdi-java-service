@@ -16,7 +16,7 @@ public interface VdiCommonService {
 
 	Account addAccount(Account account);
 
-	Users getUserByCredential(@Valid EmployeeRequest employeeRequest);
+	Users getUserByCredential(@Valid EmployeeRequest employeeRequest) throws ResourceNotFoundException;
 
 	Users addUser(@Valid Users user);
 	
@@ -28,5 +28,7 @@ public interface VdiCommonService {
 	
 	void deleteProject(Project project);
 
-	Project findById(Long projectId) throws ResourceNotFoundException;
+	Project findByProjectId(Long projectId) throws ResourceNotFoundException;
+
+	Users findByUserId(long employeeId) throws ResourceNotFoundException;
 }

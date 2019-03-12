@@ -1,6 +1,7 @@
 package com.tcs.tool.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -41,10 +42,12 @@ public class VdiCommonDaoImpl implements VdiCommonDao {
 	}
 
 	@Override
-	public Users findUserByCredential(EmployeeRequest employeeRequest) {
+	public Users findUserByCredential(EmployeeRequest employeeRequest) throws ResourceNotFoundException {
 		// TODO Auto-generated method stub
-		return userRepository.findByEmployeeCredential(employeeRequest.getEmployeeId(), employeeRequest.getPassword(),
+		Users findByEmployeeCredential = userRepository.findByEmployeeCredential(employeeRequest.getEmployeeId(), employeeRequest.getPassword(),
 				employeeRequest.getIsAdmin());
+		
+		return Optional.ofNullable(findByEmployeeCredential).orElseThrow(() ->new ResourceNotFoundException("Invalid credential"));
 	}
 
 	@Override
@@ -79,11 +82,17 @@ public class VdiCommonDaoImpl implements VdiCommonDao {
 	}*/
 
 	@Override
-	public Project findById(Long projectId) throws ResourceNotFoundException {
+	public Project findByProjectId(Long projectId) throws ResourceNotFoundException {
 		Project project = projectRepository.findById(projectId)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + projectId));
 	//	 projectRepository.findById(projectId);
 		return project;
+	}
+
+	@Override
+	public Users findByUserId(long employeeId) throws ResourceNotFoundException {
+		return userRepository.findById(employeeId)
+				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
 	}
 
 }
