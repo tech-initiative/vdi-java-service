@@ -1,6 +1,5 @@
 package com.tcs.tool.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,7 +20,7 @@ public class Account {
 	private String locationId;
 	private String status;
 	private boolean isActive;
-	private List<Project> projectList = new ArrayList<Project>();
+	private List<Project> projectList ;
 	private List<Employee> accountManager;
 
 	@Id
@@ -70,8 +69,8 @@ public class Account {
 		this.isActive = isActive;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL)
-/*	@JoinTable(name = "project", joinColumns = { @JoinColumn(name = "projectId") })*/
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="account")
+	/*@JoinTable(name = "project", joinColumns = { @JoinColumn(name = "projectId") })*/
 	public List<Project> getProjectList() {
 		return projectList;
 	}

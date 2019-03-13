@@ -1,6 +1,5 @@
 package com.tcs.tool.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,7 +21,9 @@ public class Project {
 	private String accountId;
 	private String status;
 	private boolean isActive;
-	private List<Team> teamList = new ArrayList<Team>();
+	private List<Team> teamList;
+	private List<Employee> ProjectManager;
+	private Account account;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,7 +35,7 @@ public class Project {
 		this.id = id;
 	}
 
-	@Column(name = "name", nullable = false)
+	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -42,7 +44,7 @@ public class Project {
 		this.name = name;
 	}
 
-	@Column(name = "account_id", nullable = false)
+	@Column(name = "account_id")
 	public String getAccountId() {
 		return accountId;
 	}
@@ -51,7 +53,7 @@ public class Project {
 		this.accountId = accountId;
 	}
 
-	@Column(name = "status", nullable = false)
+	@Column(name = "status")
 	public String getStatus() {
 		return status;
 	}
@@ -60,7 +62,7 @@ public class Project {
 		this.status = status;
 	}
 
-	@Column(name = "is_active ", nullable = false)
+	@Column(name = "is_active ")
 	public Boolean getIsActive() {
 		return isActive;
 	}
@@ -70,7 +72,9 @@ public class Project {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL)
-	/*@JoinTable(name = "team", joinColumns = { @JoinColumn(name = "teamId") })*/
+	/*
+	 * @JoinTable(name = "team", joinColumns = { @JoinColumn(name = "teamId") })
+	 */
 	public List<Team> getTeamList() {
 		return teamList;
 	}
@@ -79,10 +83,30 @@ public class Project {
 		this.teamList = teamList;
 	}
 
+	@OneToMany(cascade = CascadeType.ALL)
+	public List<Employee> getProjectManager() {
+		return ProjectManager;
+	}
+
+	public void setProjectManager(List<Employee> projectManager) {
+		ProjectManager = projectManager;
+	}
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	/*@JoinColumn(name = "id")*/
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
 	@Override
 	public String toString() {
 		return "Project [id=" + id + ", name=" + name + ", accountId=" + accountId + ", status=" + status
-				+ ", isActive=" + isActive + ", teamList=" + teamList + "]";
+				+ ", isActive=" + isActive + ", teamList=" + teamList + ", ProjectManager=" + ProjectManager
+				+ ", account=" + account + "]";
 	}
 
 }
