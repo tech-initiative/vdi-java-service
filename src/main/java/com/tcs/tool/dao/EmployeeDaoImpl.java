@@ -1,5 +1,6 @@
 package com.tcs.tool.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -35,9 +36,23 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public Employee findByUserId(String employeeId) throws ResourceNotFoundException {
-		return userRepository.findById(employeeId)
-				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
+	public List<Employee> findByUserEmail(String employeeEmail) {
+		return userRepository.findByUserEmail(employeeEmail);
+	}
+
+	@Override
+	public List<Employee> findByUserLocation(String locationId) {
+		return userRepository.findByUserLocation(locationId);
+	}
+
+	@Override
+	public List<Employee> findByEmployeeId(String employeeId) {
+		return userRepository.findByEmployeeId(employeeId);
+	}
+
+	@Override
+	public Employee editUser(@Valid Employee user) {
+		return userRepository.save(user);
 	}
 
 }

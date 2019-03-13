@@ -28,6 +28,8 @@ public class Employee {
 	private boolean role;
 	private boolean isActive;
 	private boolean isAdmin;
+	private boolean isAccountManager;
+	private boolean isProjectManager;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -157,6 +159,24 @@ public class Employee {
 
 	public void setRole(boolean role) {
 		this.role = role;
+	}
+
+	@Column(name="is_account_manager")
+	public boolean getIsAccountManager() {
+		return isAccountManager;
+	}
+
+	public void setIsAccountManager(boolean isAccountManager) {
+		this.isAccountManager = isAccountManager;
+	}
+
+	@Column(name="is_project_manager")
+	public boolean getIsProjectManager() {
+		return isProjectManager;
+	}
+
+	public void setIsProjectManager(boolean isProjectManager) {
+		this.isProjectManager = isProjectManager;
 	}
 	
 	@Override

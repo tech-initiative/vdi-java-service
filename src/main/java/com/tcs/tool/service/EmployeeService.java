@@ -1,5 +1,7 @@
 package com.tcs.tool.service;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import com.tcs.tool.angular.model.EmployeeRequest;
@@ -12,5 +14,11 @@ public interface EmployeeService {
 
 	Employee addUser(@Valid Employee user);
 
-	Employee findByUserId(String employeeId) throws ResourceNotFoundException;
+	List<Employee> findByUserEmail(String employeeEmail);
+
+	List<Employee> findByUserLocation(String locationId);
+
+	List<Employee> findByEmployeeId(String employeeId);
+
+	Employee editUser(@Valid Employee user);
 }

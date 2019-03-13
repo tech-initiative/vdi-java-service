@@ -6,11 +6,18 @@ public class EmployeeRequest {
 
 	@JsonProperty("tcs_employee_id")
 	private String employeeId;
+	
 	private String password;
+	
 	@JsonProperty("is_admin")
 	private boolean isAdmin;
+	
 	@JsonProperty("email_id")
 	private String emailId;
+	
+	@JsonProperty("user_name")
+	private String userName;
+	
 	@JsonProperty("location_id")
 	private String locationId;
 	
@@ -43,6 +50,12 @@ public class EmployeeRequest {
 	}
 	public void setLocationId(String locationId) {
 		this.locationId = locationId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
 }

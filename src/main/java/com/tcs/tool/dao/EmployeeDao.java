@@ -1,5 +1,9 @@
 package com.tcs.tool.dao;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import com.tcs.tool.angular.model.EmployeeRequest;
 import com.tcs.tool.exception.ResourceNotFoundException;
 import com.tcs.tool.model.Employee;
@@ -10,6 +14,12 @@ public interface EmployeeDao {
 
 	Employee addUser(Employee user);
 
-	Employee findByUserId(String employeeId) throws ResourceNotFoundException;
+	List<Employee> findByUserEmail(String employeeEmail);
+
+	List<Employee> findByUserLocation(String locationId);
+
+	List<Employee> findByEmployeeId(String employeeId);
+
+	Employee editUser(@Valid Employee user);
 
 }

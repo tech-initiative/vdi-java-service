@@ -1,5 +1,7 @@
 package com.tcs.tool.service;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,23 +16,37 @@ import com.tcs.tool.model.Employee;
 public class EmployeeServiceImpl implements EmployeeService{
 
 	@Autowired
-	EmployeeDao vdiCommonDao;
+	EmployeeDao employeeDao;
 	
 	@Override
 	public Employee getUserByCredential(EmployeeRequest employeeRequest) throws ResourceNotFoundException {
 		// TODO Auto-generated method stub
-		return vdiCommonDao.findUserByCredential(employeeRequest);
+		return employeeDao.findUserByCredential(employeeRequest);
 	}
 
 	@Override
 	public Employee addUser(@Valid Employee user) {
 		// TODO Auto-generated method stub
-		return vdiCommonDao.addUser(user);
+		return employeeDao.addUser(user);
 	}
 
-	
 	@Override
-	public Employee findByUserId(String employeeId) throws ResourceNotFoundException {
-		return vdiCommonDao.findByUserId(employeeId);
+	public List<Employee> findByUserEmail(String employeeEmail) {
+		return employeeDao.findByUserEmail(employeeEmail);
+	}
+
+	@Override
+	public List<Employee> findByUserLocation(String locationId) {
+		return employeeDao.findByUserLocation(locationId);
+	}
+
+	@Override
+	public List<Employee> findByEmployeeId(String employeeId) {
+		return employeeDao.findByEmployeeId(employeeId);
+	}
+
+	@Override
+	public Employee editUser(@Valid Employee user) {
+		return employeeDao.editUser(user);
 	}
 }
