@@ -22,7 +22,7 @@ public class Account {
 	private String status;
 	private boolean isActive;
 	private List<Project> projectList = new ArrayList<Project>();
-	private List<Users> accountManager;
+	private List<Employee> accountManager;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -81,11 +81,11 @@ public class Account {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL)
-	public List<Users> getAccountManager() {
+	public List<Employee> getAccountManager() {
 		return accountManager;
 	}
 	
-	public void setAccountManager(List<Users> accountManager) {
+	public void setAccountManager(List<Employee> accountManager) {
 		this.accountManager = accountManager;
 	}
 

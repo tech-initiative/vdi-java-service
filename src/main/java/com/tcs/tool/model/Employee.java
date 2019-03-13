@@ -10,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Users")
-public class Users {
+@Table(name = "Employee")
+public class Employee {
 
 	private long id;
 	private String firstName;

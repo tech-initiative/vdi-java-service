@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tcs.tool.angular.model.EmployeeRequest;
 import com.tcs.tool.exception.ResourceNotFoundException;
-import com.tcs.tool.model.Users;
-import com.tcs.tool.service.VdiCommonService;
+import com.tcs.tool.model.Employee;
+import com.tcs.tool.service.EmployeeService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -20,12 +20,12 @@ import com.tcs.tool.service.VdiCommonService;
 public class LoginController {
 
 	@Autowired
-	private VdiCommonService employeeservice;
+	private EmployeeService employeeService;
 	
 	@PostMapping("/login")
-	public Users login(@Valid @RequestBody EmployeeRequest employeeRequest) throws ResourceNotFoundException {
+	public Employee login(@Valid @RequestBody EmployeeRequest employeeRequest) throws ResourceNotFoundException {
 		//validateRequest(employeeRequest);
-		Users user = employeeservice.getUserByCredential(employeeRequest);
+		Employee user = employeeService.getUserByCredential(employeeRequest);
 		return user;
 	}
 

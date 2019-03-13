@@ -19,8 +19,10 @@ import com.tcs.tool.angular.model.EmployeeRequest;
 import com.tcs.tool.exception.ResourceNotFoundException;
 import com.tcs.tool.model.Account;
 import com.tcs.tool.model.Project;
-import com.tcs.tool.model.Users;
-import com.tcs.tool.service.VdiCommonService;
+import com.tcs.tool.model.Employee;
+import com.tcs.tool.service.AccountService;
+import com.tcs.tool.service.ProjectService;
+import com.tcs.tool.service.EmployeeService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -28,54 +30,60 @@ import com.tcs.tool.service.VdiCommonService;
 public class ReportController {
 	
 	@Autowired
-	private VdiCommonService employeeservice;
+	private EmployeeService employeeService;
+	
+	@Autowired
+	private ProjectService projectService;
+	
+	@Autowired
+	private AccountService accountService;
 	
 	@GetMapping("/accounts")
 	public List<Account> listAccount() {
-		return employeeservice.findAllAccount();
+		return accountService.findAllAccount();
 	}
 	
 	@PostMapping("/accounts")
 	public Account addAccount(@Valid @RequestBody Account account){
-		return employeeservice.addAccount(account);
+		return accountService.addAccount(account);
 	}
 
 	@PostMapping("/users/save")
-	public Users addUser(@Valid @RequestBody Users user){
-		return employeeservice.addUser(user);
+	public Employee addUser(@Valid @RequestBody Employee user){
+		return employeeService.addUser(user);
 	}
 	
 	@GetMapping("/users")
-	public Users listUser(@Valid @RequestBody EmployeeRequest employeeRequest) throws ResourceNotFoundException{
-		return employeeservice.findByUserId(employeeRequest.getEmployeeId());
+	public Employee listUser(@Valid @RequestBody EmployeeRequest employeeRequest) throws ResourceNotFoundException{
+		return employeeService.findByUserId(employeeRequest.getEmployeeId());
 	}
 	
 	@GetMapping("/projects")
 	public List<Project> listProject() {
-		return employeeservice.getAllProjects();
+		return projectService.getAllProjects();
 	}
 	
 	@PostMapping("/projects/save")
 	public Project addProject(@Valid @RequestBody Project project) {
-		Project projectDetails = employeeservice.addProject(project);
+		Project projectDetails = projectService.addProject(project);
 		return projectDetails;
 	}
 
 	@PutMapping("/projects/{id}")
 	public <ResponseEntity> Project editProject(@PathVariable(value = "id") Long projectId,
 			@Valid @RequestBody Project projectDetails) throws ResourceNotFoundException {
-		Project project =  employeeservice.findByProjectId(projectId);
+		Project project =  projectService.findByProjectId(projectId);
 		project.setName(projectDetails.getName());
 		project.setAccountId(projectDetails.getAccountId());
 		project.setStatus(projectDetails.getStatus());
-		return employeeservice.editProject(project);
+		return projectService.editProject(project);
 	}
 
 	@DeleteMapping("/projects/{id}")
 	public Boolean deleteProject(@PathVariable(value = "id") Long projectId,
 			@Valid @RequestBody Project projectDetails) throws ResourceNotFoundException {
-		Project project =  employeeservice.findByProjectId(projectId);
-		employeeservice.deleteProject(project);
+		Project project =  projectService.findByProjectId(projectId);
+		projectService.deleteProject(project);
 		return true;
 	}
 	
