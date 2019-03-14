@@ -11,26 +11,31 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "Account")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "accId")
 public class Account {
 
-	private long id;
+	private long accId;
 	private String name;
 	private String locationId;
 	private String status;
 	private boolean isActive;
-	private List<Project> projectList ;
+	private List<Project> projectList;
 	private List<Employee> accountManager;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public long getId() {
-		return id;
+	@Column(name = "acc_id", nullable = false)
+	public long getAccId() {
+		return accId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setAccId(long id) {
+		this.accId = id;
 	}
 
 	@Column(name = "name", nullable = false)
@@ -69,8 +74,7 @@ public class Account {
 		this.isActive = isActive;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL,mappedBy="account")
-	/*@JoinTable(name = "project", joinColumns = { @JoinColumn(name = "projectId") })*/
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
 	public List<Project> getProjectList() {
 		return projectList;
 	}
@@ -83,14 +87,14 @@ public class Account {
 	public List<Employee> getAccountManager() {
 		return accountManager;
 	}
-	
+
 	public void setAccountManager(List<Employee> accountManager) {
 		this.accountManager = accountManager;
 	}
 
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", name=" + name + ", locationId=" + locationId + ", status=" + status
+		return "Account [id=" + accId + ", name=" + name + ", locationId=" + locationId + ", status=" + status
 				+ ", isActive=" + isActive + "]";
 	}
 

@@ -94,12 +94,10 @@ public class ReportController {
 	@PostMapping("/projects")
 	public Project addProject(@Valid @RequestBody Project project) {
 		accountrep.findById(new Long(1));
-		// accountObj.setId(4);
 
-		Account acount = accountrep.findById(new Long(1)).get();
-
-		acount.getProjectList().add(project);
-		project.setAccount(accountrep.findById(new Long(1)).get());
+		Account account = accountrep.findById(new Long(1)).get();
+		//account.getProjectList().add(project);
+		project.setAccount(account);
 		Project projectDetails = projectService.addProject(project);
 		return projectDetails;
 	}
