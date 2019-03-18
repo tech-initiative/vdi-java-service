@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -18,7 +19,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "Project")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+/*@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")*/
 public class Project {
 
 	private long id;
@@ -29,9 +30,11 @@ public class Project {
 	private List<Team> teamList;
 	private List<Employee> ProjectManager;
 	private Account account;
+	
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="project_seq")
+	@SequenceGenerator(name="project_seq",sequenceName="project_SEQ")
 	public long getId() {
 		return id;
 	}
@@ -77,9 +80,6 @@ public class Project {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL)
-	/*
-	 * @JoinTable(name = "team", joinColumns = { @JoinColumn(name = "teamId") })
-	 */
 	public List<Team> getTeamList() {
 		return teamList;
 	}
