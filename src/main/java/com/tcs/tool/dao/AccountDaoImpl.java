@@ -2,6 +2,8 @@ package com.tcs.tool.dao;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,13 +18,16 @@ public class AccountDaoImpl implements AccountDao {
 
 	@Override
 	public List<Account> findAllAccount() {
-		// TODO Auto-generated method stub
 		return accountRepository.findAll();
 	}
 
 	@Override
 	public Account addAccount(Account account) {
-		// TODO Auto-generated method stub
+		return accountRepository.save(account);
+	}
+
+	@Override
+	public Account editAccount(@Valid Account account) {
 		return accountRepository.save(account);
 	}
 }

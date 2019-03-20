@@ -1,8 +1,5 @@
 package com.tcs.tool.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,38 +7,40 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "Project")
-/*@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")*/
 public class Project {
 
-	private long id;
+	@JsonView(View.Summary.class)
+	private long projectId;
+	@JsonView(View.Summary.class)
 	private String name;
+	@JsonView(View.Summary.class)
 	private String accountId;
+	@JsonView(View.Summary.class)
 	private String status;
+	@JsonView(View.Summary.class)
 	private boolean isActive;
-	private List<Team> teamList;
-	private List<Employee> ProjectManager;
+	@JsonView(View.Summary.class)
 	private Account account;
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="project_seq")
 	@SequenceGenerator(name="project_seq",sequenceName="project_SEQ")
-	public long getId() {
-		return id;
+	@Column(name="project_id")
+	public long getProjectId() {
+		return projectId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setProjectId(long projectId) {
+		this.projectId = projectId;
 	}
+
 
 	@Column(name = "name")
 	public String getName() {
@@ -79,26 +78,8 @@ public class Project {
 		this.isActive = isActive;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL)
-	public List<Team> getTeamList() {
-		return teamList;
-	}
-
-	public void setTeamList(List<Team> teamList) {
-		this.teamList = teamList;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL)
-	public List<Employee> getProjectManager() {
-		return ProjectManager;
-	}
-
-	public void setProjectManager(List<Employee> projectManager) {
-		ProjectManager = projectManager;
-	}
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "acc_id")
+	@ManyToOne
+	@JoinColumn(name="fk_account")
 	public Account getAccount() {
 		return account;
 	}
@@ -109,8 +90,8 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return "Project [id=" + id + ", name=" + name + ", accountId=" + accountId + ", status=" + status
-				+ ", isActive=" + isActive + ", teamList=" + teamList + ", ProjectManager=" + ProjectManager
+		return "Project [id=" + getProjectId() + ", name=" + name + ", accountId=" + accountId + ", status=" + status
+				+ ", isActive=" + isActive + ", teamList="  + ", ProjectManager=" 
 				+ ", account=" + account + "]";
 	}
 

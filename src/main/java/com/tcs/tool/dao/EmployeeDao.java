@@ -22,4 +22,6 @@ public interface EmployeeDao {
 
 	Employee editUser(@Valid Employee user);
 
+	void deleteUser(@Valid Employee user);
+
 }

@@ -1,5 +1,6 @@
 package com.tcs.tool.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,12 +17,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.tcs.tool.angular.model.AccountDto;
 import com.tcs.tool.angular.model.EmployeeRequest;
+import com.tcs.tool.angular.model.ProjectDto;
 import com.tcs.tool.exception.ResourceNotFoundException;
 import com.tcs.tool.model.Account;
 import com.tcs.tool.model.Employee;
 import com.tcs.tool.model.Project;
 import com.tcs.tool.model.Team;
+import com.tcs.tool.model.View;
 import com.tcs.tool.repository.AccountRepository;
 import com.tcs.tool.service.AccountService;
 import com.tcs.tool.service.EmployeeService;
@@ -48,8 +53,29 @@ public class ReportController {
 	private AccountRepository accountrep;
 
 	@GetMapping("/accounts")
-	public List<Account> listAccount() {
-		return accountService.findAllAccount();
+	public List<AccountDto> listAccount() {
+		List<Account> accountList = accountService.findAllAccount();
+		List<AccountDto> accountListDto = new ArrayList<>();
+		for(Account account : accountList){
+			AccountDto accountDto = new AccountDto();
+			accountDto.setAccId(account.getAccId());
+			accountDto.setActive(account.getIsActive());
+			accountDto.setLocationId(account.getLocationId());
+			accountDto.setName(accountDto.getName());
+			List<ProjectDto> projectListDto = new ArrayList<>();
+			for(Project project : account.getProjectList()){
+				ProjectDto projectDto = new ProjectDto();
+				projectDto.setAccountId(project.getAccountId());
+				projectDto.setActive(project.getIsActive());
+				projectDto.setName(project.getName());
+				projectDto.setProjectId(project.getProjectId());
+				projectDto.setStatus(project.getStatus());
+				projectListDto.add(projectDto);
+			}
+			accountDto.setProjectList(projectListDto);
+			accountListDto.add(accountDto);
+		}
+		return accountListDto;
 	}
 
 	@PostMapping("/accounts")
@@ -57,6 +83,11 @@ public class ReportController {
 		return accountService.addAccount(account);
 	}
 
+	@PutMapping("/accounts")
+	public Account editAccount(@Valid @RequestBody Account account) {
+		return accountService.editAccount(account);
+	}
+	
 	@PostMapping("/users/save")
 	public Employee addUser(@Valid @RequestBody Employee user) {
 		return employeeService.addUser(user);
@@ -85,18 +116,42 @@ public class ReportController {
 	public Employee editUser(@Valid @RequestBody Employee user) {
 		return employeeService.editUser(user);
 	}
+	
+	@DeleteMapping("/users")
+	public void deleteUser(@Valid @RequestBody Employee user) {
+		employeeService.deleteUser(user);
+	}
 
 	@GetMapping("/projects")
-	public List<Project> listProject() {
-		return projectService.getAllProjects();
+	public List<ProjectDto> listProject() {
+		List<ProjectDto> projectListDto = new ArrayList<>();
+		List<Project> projects = projectService.getAllProjects();
+		
+		for(Project project : projects){
+			ProjectDto projectDto = new ProjectDto();
+			projectDto.setAccountId(project.getAccountId());
+			projectDto.setActive(project.getIsActive());
+			projectDto.setName(project.getName());
+			projectDto.setProjectId(project.getProjectId());
+			projectDto.setStatus(project.getStatus());
+			AccountDto accountDto = new AccountDto();
+			accountDto.setAccId(project.getAccount().getAccId());
+			accountDto.setActive(project.getAccount().getIsActive());
+			accountDto.setLocationId(project.getAccount().getLocationId());
+			accountDto.setName(project.getAccount().getName());
+			accountDto.setStatus(project.getAccount().getStatus());
+			projectDto.setAccount(accountDto );
+			projectListDto.add(projectDto);
+		}
+		
+		return projectListDto;
 	}
 
 	@PostMapping("/projects")
+	@JsonView(View.Summary.class)
 	public Project addProject(@Valid @RequestBody Project project) {
-		accountrep.findById(new Long(1));
-
 		Account account = accountrep.findById(new Long(1)).get();
-		//account.getProjectList().add(project);
+		account.getProjectList().add(project);
 		project.setAccount(account);
 		Project projectDetails = projectService.addProject(project);
 		return projectDetails;

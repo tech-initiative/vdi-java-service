@@ -21,7 +21,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public Employee findUserByCredential(EmployeeRequest employeeRequest) throws ResourceNotFoundException {
-		// TODO Auto-generated method stub
 		Employee findByEmployeeCredential = userRepository.findByEmployeeCredential(employeeRequest.getEmployeeId(),
 				employeeRequest.getPassword(), employeeRequest.getIsAdmin());
 
@@ -31,7 +30,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public Employee addUser(@Valid Employee user) {
-		// TODO Auto-generated method stub
 		return userRepository.save(user);
 	}
 
@@ -53,6 +51,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public Employee editUser(@Valid Employee user) {
 		return userRepository.save(user);
+	}
+
+	@Override
+	public void deleteUser(@Valid Employee user) {
+		userRepository.delete(user);;
 	}
 
 }

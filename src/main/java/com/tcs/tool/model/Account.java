@@ -2,7 +2,6 @@ package com.tcs.tool.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,20 +12,27 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 @Entity
 @Table(name = "Account")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "accId")
 public class Account {
 
+	@JsonView(View.Summary.class)
 	private long accId;
+	@JsonView(View.Summary.class)
 	private String name;
+	@JsonView(View.Summary.class)
 	private String locationId;
+	@JsonView(View.Summary.class)
 	private String status;
+	@JsonView(View.Summary.class)
 	private boolean isActive;
+	
 	private List<Project> projectList;
-	private List<Employee> accountManager;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -76,22 +82,13 @@ public class Account {
 		this.isActive = isActive;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
+	@OneToMany(mappedBy="account")
 	public List<Project> getProjectList() {
 		return projectList;
 	}
 
 	public void setProjectList(List<Project> projectList) {
 		this.projectList = projectList;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL)
-	public List<Employee> getAccountManager() {
-		return accountManager;
-	}
-
-	public void setAccountManager(List<Employee> accountManager) {
-		this.accountManager = accountManager;
 	}
 
 	@Override

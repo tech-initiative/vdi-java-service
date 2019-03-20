@@ -20,13 +20,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 	@Override
 	public Employee getUserByCredential(EmployeeRequest employeeRequest) throws ResourceNotFoundException {
-		// TODO Auto-generated method stub
 		return employeeDao.findUserByCredential(employeeRequest);
 	}
 
 	@Override
 	public Employee addUser(@Valid Employee user) {
-		// TODO Auto-generated method stub
 		return employeeDao.addUser(user);
 	}
 
@@ -48,5 +46,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	public Employee editUser(@Valid Employee user) {
 		return employeeDao.editUser(user);
+	}
+
+	@Override
+	public void deleteUser(@Valid Employee user) {
+		employeeDao.deleteUser(user);
 	}
 }
