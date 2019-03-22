@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.tcs.tool.dao.AccountDao;
 import com.tcs.tool.model.Account;
+import com.tcs.tool.model.Employee;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -29,5 +30,10 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public Account editAccount(@Valid Account account) {
 		return accountDao.editAccount(account);
+	}
+
+	@Override
+	public List<Employee> findAccountManager(long accId) {
+		return accountDao.findAccountManager(accId);
 	}
 }

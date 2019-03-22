@@ -18,7 +18,7 @@ public interface EmployeeDao {
 
 	List<Employee> findByUserLocation(String locationId);
 
-	List<Employee> findByEmployeeId(String employeeId);
+	Employee findByEmployeeId(long employeeId) throws ResourceNotFoundException;
 
 	Employee editUser(@Valid Employee user);
 

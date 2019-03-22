@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.tcs.tool.model.Account;
+import com.tcs.tool.model.Employee;
 
 public interface AccountService {
 
@@ -13,5 +14,7 @@ public interface AccountService {
 	Account addAccount(Account account);
 
 	Account editAccount(@Valid Account account);
+
+	List<Employee> findAccountManager(long accId);
 
 }

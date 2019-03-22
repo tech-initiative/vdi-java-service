@@ -4,8 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,12 +11,11 @@ import javax.persistence.Table;
 @Table(name = "Employee")
 public class Employee {
 
-	private long id;
+	private long tcsEmployeeId;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String password;
-	private String tcsEmployeeId;
 	private String clientId;
 	private String locationId;
 	private Date onboardingDate;
@@ -32,15 +29,15 @@ public class Employee {
 	private boolean isProjectManager;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public long getId() {
-		return id;
+	@Column(name = "tcs_employee_id")
+	public long getTcsEmployeeId() {
+		return tcsEmployeeId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setTcsEmployeeId(long tcsEmployeeId) {
+		this.tcsEmployeeId = tcsEmployeeId;
 	}
-
+	
 	@Column(name = "first_name")
 	public String getFirstName() {
 		return firstName;
@@ -77,14 +74,6 @@ public class Employee {
 		this.password = password;
 	}
 
-	@Column(name = "tcs_employee_id")
-	public String getTcsEmployeeId() {
-		return tcsEmployeeId;
-	}
-
-	public void setTcsEmployeeId(String tcsEmployeeId) {
-		this.tcsEmployeeId = tcsEmployeeId;
-	}
 	@Column(name = "client_id")
 	public String getClientId() {
 		return clientId;
@@ -181,7 +170,7 @@ public class Employee {
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+		return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", password=" + password + ", tcsEmployeeId=" + tcsEmployeeId + ", clientId=" + clientId
 				+ ", locationId=" + locationId + ", onboardingDate=" + onboardingDate + ", registrationDate="
 				+ registrationDate + ", last_login_time=" + last_login_time + ", status=" + status + ", isActive="

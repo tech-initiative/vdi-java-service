@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class EmployeeRequest {
 
 	@JsonProperty("tcs_employee_id")
-	private String employeeId;
+	private long employeeId;
 	
 	private String password;
 	
@@ -21,10 +21,10 @@ public class EmployeeRequest {
 	@JsonProperty("location_id")
 	private String locationId;
 	
-	public String getEmployeeId() {
+	public long getEmployeeId() {
 		return employeeId;
 	}
-	public void setEmployeeId(String employeeId) {
+	public void setEmployeeId(long employeeId) {
 		this.employeeId = employeeId;
 	}
 	public String getPassword() {

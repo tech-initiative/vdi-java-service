@@ -44,8 +44,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public List<Employee> findByEmployeeId(String employeeId) {
-		return userRepository.findByEmployeeId(employeeId);
+	public Employee findByEmployeeId(long employeeId) throws ResourceNotFoundException {
+		return userRepository.findById(employeeId).orElseThrow(() -> new ResourceNotFoundException("Invalid credential"));
 	}
 
 	@Override

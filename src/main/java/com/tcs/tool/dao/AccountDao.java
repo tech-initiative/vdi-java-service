@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.tcs.tool.model.Account;
+import com.tcs.tool.model.Employee;
 
 public interface AccountDao {
 
@@ -13,5 +14,7 @@ public interface AccountDao {
 	Account addAccount(Account account);
 
 	Account editAccount(@Valid Account account);
+
+	List<Employee> findAccountManager(long accId);
 
 }

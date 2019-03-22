@@ -73,8 +73,12 @@ public class ReportController {
 				projectListDto.add(projectDto);
 			}
 			accountDto.setProjectList(projectListDto);
+			List<Employee> accountManagers = accountService.findAccountManager(account.getAccId());
+			accountDto.setAccountManager(accountManagers);
 			accountListDto.add(accountDto);
 		}
+		
+		
 		return accountListDto;
 	}
 
@@ -98,7 +102,8 @@ public class ReportController {
 			throws ResourceNotFoundException {
 		List<Employee> employeeList = null;
 		if (Optional.ofNullable(employeeRequest.getEmployeeId()).isPresent()) {
-			employeeList = employeeService.findByEmployeeId(employeeRequest.getEmployeeId());
+			employeeList = new ArrayList<>();
+			employeeList.add(employeeService.findByEmployeeId(employeeRequest.getEmployeeId()));
 		} else if (Optional.ofNullable(employeeRequest.getEmailId()).isPresent()) {
 			employeeList = employeeService.findByUserEmail(employeeRequest.getEmailId());
 		} else if (Optional.ofNullable(employeeRequest.getLocationId()).isPresent()) {

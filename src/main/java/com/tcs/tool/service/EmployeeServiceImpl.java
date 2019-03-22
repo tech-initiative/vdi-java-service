@@ -39,7 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public List<Employee> findByEmployeeId(String employeeId) {
+	public Employee findByEmployeeId(long employeeId) throws ResourceNotFoundException {
 		return employeeDao.findByEmployeeId(employeeId);
 	}
 

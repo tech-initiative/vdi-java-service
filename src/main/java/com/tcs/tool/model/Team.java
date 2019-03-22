@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name = "Team")
 public class Team {
 
-	private long id;
+	private long teamId;
 	private String name;
 	private String projectId;
 	private String status;
@@ -19,14 +19,15 @@ public class Team {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public long getId() {
-		return id;
+	@Column(name="team_id")
+	public long getTeamId() {
+		return teamId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setTeamId(long teamId) {
+		this.teamId = teamId;
 	}
-
+	
 	@Column(name = "name")
 	public String getName() {
 		return name;
@@ -65,7 +66,7 @@ public class Team {
 
 	@Override
 	public String toString() {
-		return "Team [id=" + id + ", name=" + name + ", projectId=" + projectId + ", status=" + status + ", isActive="
+		return "Team [id=" + teamId + ", name=" + name + ", projectId=" + projectId + ", status=" + status + ", isActive="
 				+ isActive + "]";
 	}
 

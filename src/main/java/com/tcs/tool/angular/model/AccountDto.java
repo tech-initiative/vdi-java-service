@@ -2,6 +2,8 @@ package com.tcs.tool.angular.model;
 
 import java.util.List;
 
+import com.tcs.tool.model.Employee;
+
 public class AccountDto {
 
 	private long accId;
@@ -9,6 +11,9 @@ public class AccountDto {
 	private String locationId;
 	
 	private List<ProjectDto> projectList;
+	
+	private List<Employee> accountManagerList;
+	
 	
 	public long getAccId() {
 		return accId;
@@ -45,6 +50,12 @@ public class AccountDto {
 	}
 	public void setProjectList(List<ProjectDto> projectList) {
 		this.projectList = projectList;
+	}
+	public List<Employee> getAccountManager() {
+		return accountManagerList;
+	}
+	public void setAccountManager(List<Employee> accountManager) {
+		this.accountManagerList = accountManager;
 	}
 	private String status;
 	private boolean isActive;
