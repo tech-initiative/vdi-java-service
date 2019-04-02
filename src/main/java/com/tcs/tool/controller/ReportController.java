@@ -62,7 +62,7 @@ public class ReportController {
 			accountDto.setAccId(account.getAccId());
 			accountDto.setActive(account.getIsActive());
 			accountDto.setLocationId(account.getLocationId());
-			accountDto.setName(accountDto.getName());
+			accountDto.setName(account.getName());
 			List<ProjectDto> projectListDto = new ArrayList<>();
 			for(Project project : account.getProjectList()){
 				ProjectDto projectDto = new ProjectDto();
@@ -157,7 +157,7 @@ public class ReportController {
 	@PostMapping("/projects")
 	@JsonView(View.Summary.class)
 	public Project addProject(@Valid @RequestBody Project project) {
-		Account account = accountrep.findById(new Long(1)).get();
+		Account account = accountrep.findById(new Long(project.getAccountId())).get();
 		account.getProjectList().add(project);
 		project.setAccount(account);
 		Project projectDetails = projectService.addProject(project);
