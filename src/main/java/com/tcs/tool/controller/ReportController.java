@@ -93,6 +93,11 @@ public class ReportController {
 		return accountService.editAccount(account);
 	}
 	
+	@DeleteMapping("/accounts")
+	public void deleteAccount(@Valid @RequestBody Account account) {
+		accountService.deleteAccount(account);
+	}
+	
 	@PostMapping("/users/save")
 	public Employee addUser(@Valid @RequestBody EmployeeAddRequest employeeAddRequest) {
 		Employee addUser = employeeService.addUser(employeeAddRequest);

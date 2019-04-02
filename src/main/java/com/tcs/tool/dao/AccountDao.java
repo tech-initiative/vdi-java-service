@@ -17,4 +17,6 @@ public interface AccountDao {
 
 	List<Employee> findAccountManager(long accId);
 
+	void deleteAccount(@Valid Account account);
+
 }

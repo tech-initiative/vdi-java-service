@@ -10,12 +10,16 @@ import org.springframework.stereotype.Repository;
 import com.tcs.tool.model.Account;
 import com.tcs.tool.model.Employee;
 import com.tcs.tool.repository.AccountRepository;
+import com.tcs.tool.repository.EmployeeRepository;
 
 @Repository
 public class AccountDaoImpl implements AccountDao {
 
 	@Autowired
 	private AccountRepository accountRepository;
+	
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
 	@Override
 	public List<Account> findAllAccount() {
@@ -34,6 +38,11 @@ public class AccountDaoImpl implements AccountDao {
 
 	@Override
 	public List<Employee> findAccountManager(long accId) {
-		return accountRepository.findAccountManager(accId);
+		return employeeRepository.findAccountManager(accId);
+	}
+
+	@Override
+	public void deleteAccount(@Valid Account account) {
+		accountRepository.deleteById(account.getAccId());
 	}
 }

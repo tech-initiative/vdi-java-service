@@ -36,4 +36,9 @@ public class AccountServiceImpl implements AccountService {
 	public List<Employee> findAccountManager(long accId) {
 		return accountDao.findAccountManager(accId);
 	}
+
+	@Override
+	public void deleteAccount(@Valid Account account) {
+		accountDao.deleteAccount(account);
+	}
 }
