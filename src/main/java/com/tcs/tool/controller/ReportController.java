@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.tcs.tool.angular.model.AccountDto;
-import com.tcs.tool.angular.model.EmployeeRequest;
+import com.tcs.tool.angular.model.EmployeeAddRequest;
+import com.tcs.tool.angular.model.EmployeeLoginRequest;
 import com.tcs.tool.angular.model.ProjectDto;
 import com.tcs.tool.exception.ResourceNotFoundException;
 import com.tcs.tool.model.Account;
@@ -93,12 +94,13 @@ public class ReportController {
 	}
 	
 	@PostMapping("/users/save")
-	public Employee addUser(@Valid @RequestBody Employee user) {
-		return employeeService.addUser(user);
+	public Employee addUser(@Valid @RequestBody EmployeeAddRequest employeeAddRequest) {
+		Employee addUser = employeeService.addUser(employeeAddRequest);
+		return addUser;
 	}
 
 	@PostMapping("/users")
-	public List<Employee> listUser(@Valid @RequestBody EmployeeRequest employeeRequest)
+	public List<Employee> listUser(@Valid @RequestBody EmployeeLoginRequest employeeRequest)
 			throws ResourceNotFoundException {
 		List<Employee> employeeList = null;
 		if (Optional.ofNullable(employeeRequest.getEmployeeId()).isPresent()) {

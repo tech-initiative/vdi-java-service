@@ -22,7 +22,6 @@ public class Employee {
 	private Date registrationDate;
 	private Date last_login_time;
 	private String status;
-	private boolean role;
 	private boolean isActive;
 	private boolean isAdmin;
 	private boolean isAccountManager;
@@ -139,15 +138,6 @@ public class Employee {
 	
 	public void setIsAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
-	}
-
-	@Column(name="role")
-	public boolean getRole() {
-		return role;
-	}
-
-	public void setRole(boolean role) {
-		this.role = role;
 	}
 
 	@Column(name="is_account_manager")

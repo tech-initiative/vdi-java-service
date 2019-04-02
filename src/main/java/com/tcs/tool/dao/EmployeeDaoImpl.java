@@ -8,7 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.tcs.tool.angular.model.EmployeeRequest;
+import com.tcs.tool.angular.model.EmployeeLoginRequest;
 import com.tcs.tool.exception.ResourceNotFoundException;
 import com.tcs.tool.model.Employee;
 import com.tcs.tool.repository.EmployeeRepository;
@@ -20,7 +20,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	private EmployeeRepository userRepository;
 
 	@Override
-	public Employee findUserByCredential(EmployeeRequest employeeRequest) throws ResourceNotFoundException {
+	public Employee findUserByCredential(EmployeeLoginRequest employeeRequest) throws ResourceNotFoundException {
 		Employee findByEmployeeCredential = userRepository.findByEmployeeCredential(employeeRequest.getEmployeeId(),
 				employeeRequest.getPassword(), employeeRequest.getIsAdmin());
 
@@ -57,5 +57,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public void deleteUser(@Valid Employee user) {
 		userRepository.delete(user);;
 	}
+
+	@Override
+	public void insertAccontMangerRole(String accountId, long tcsEmployeeId) {
+		userRepository.insertAccontMangerRole(new Long(accountId), tcsEmployeeId);
+	}
+
+	@Override
+	public void insertProjectMangerRole(String projectId, long tcsEmployeeId) {
+		userRepository.insertProjectMangerRole(new Long(projectId), tcsEmployeeId);
+	}
+
 
 }

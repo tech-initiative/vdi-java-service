@@ -7,7 +7,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tcs.tool.angular.model.EmployeeRequest;
+import com.tcs.tool.angular.model.EmployeeAddRequest;
+import com.tcs.tool.angular.model.EmployeeLoginRequest;
 import com.tcs.tool.dao.EmployeeDao;
 import com.tcs.tool.exception.ResourceNotFoundException;
 import com.tcs.tool.model.Employee;
@@ -19,13 +20,26 @@ public class EmployeeServiceImpl implements EmployeeService{
 	EmployeeDao employeeDao;
 	
 	@Override
-	public Employee getUserByCredential(EmployeeRequest employeeRequest) throws ResourceNotFoundException {
+	public Employee getUserByCredential(EmployeeLoginRequest employeeRequest) throws ResourceNotFoundException {
 		return employeeDao.findUserByCredential(employeeRequest);
 	}
 
 	@Override
-	public Employee addUser(@Valid Employee user) {
-		return employeeDao.addUser(user);
+	public Employee addUser(@Valid EmployeeAddRequest employeeAddRequest) {
+		Employee addUser = employeeDao.addUser(employeeAddRequest.getEmployee());
+
+		if(employeeAddRequest.getIsAccountManager() == true){
+			for (String accountId : employeeAddRequest.getAccountIdList()) {
+				employeeDao.insertAccontMangerRole(accountId, employeeAddRequest.getEmployee().getTcsEmployeeId());
+			}
+		}
+		
+		if(employeeAddRequest.getIsProjectManager() == true){
+			for (String projectId : employeeAddRequest.getProjectIdList()) {
+				employeeDao.insertProjectMangerRole(projectId, employeeAddRequest.getEmployee().getTcsEmployeeId());
+			}
+		}
+		return addUser;
 	}
 
 	@Override

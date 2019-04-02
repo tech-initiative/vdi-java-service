@@ -2,7 +2,7 @@ package com.tcs.tool.angular.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class EmployeeRequest {
+public class EmployeeLoginRequest {
 
 	@JsonProperty("tcs_employee_id")
 	private long employeeId;

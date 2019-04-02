@@ -2,7 +2,10 @@ package com.tcs.tool.repository;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.tcs.tool.model.Employee;
@@ -17,5 +20,15 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 	@Query("From Employee u where u.locationId = ?1")
 	List<Employee> findByUserLocation(String locationId);
+
+	@Modifying
+	@Transactional
+	@Query(value="INSERT INTO USER_ROLE_MAPPING (USER_ID, ROLE_ID, ACCOUNT_ID) VALUES (?2, 1, ?1)", nativeQuery = true)
+	void insertAccontMangerRole(long accountId, long tcsEmployeeId);
+
+	@Modifying
+	@Transactional
+	@Query(value="INSERT INTO USER_ROLE_MAPPING (PROJECT_ID, ROLE_ID, ACCOUNT_ID) VALUES (?2, 2, ?1)", nativeQuery = true)
+	void insertProjectMangerRole(long projectId, long tcsEmployeeId);
 
 }
