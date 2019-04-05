@@ -1,22 +1,25 @@
-package com.tcs.tool.service;
+package com.tcs.tool.transformer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.tcs.tool.angular.model.AccountDto;
 import com.tcs.tool.angular.model.ProjectDto;
 import com.tcs.tool.model.Account;
 import com.tcs.tool.model.Employee;
 import com.tcs.tool.model.Project;
+import com.tcs.tool.service.AccountService;
 
-public class Transforms {
-	
+@Component
+public class AccountTransformer {
+
 	@Autowired
 	private AccountService accountService;
 
-	public List<AccountDto> setAccountDetails(List<Account> accountList) {
+	public List<AccountDto> transformAccountResponse(List<Account> accountList) {
 		List<AccountDto> accountListDto = new ArrayList<>();
 		for (Account account : accountList) {
 			AccountDto accountDto = new AccountDto();
@@ -42,24 +45,4 @@ public class Transforms {
 		return accountListDto;
 	}
 
-	public List<ProjectDto> setProjectDetails(List<Project> projects) {
-		List<ProjectDto> projectListDto = new ArrayList<>();
-		for (Project project : projects) {
-			ProjectDto projectDto = new ProjectDto();
-			projectDto.setAccountId(project.getAccountId());
-			projectDto.setActive(project.getIsActive());
-			projectDto.setName(project.getName());
-			projectDto.setProjectId(project.getProjectId());
-			projectDto.setStatus(project.getStatus());
-			AccountDto accountDto = new AccountDto();
-			accountDto.setAccId(project.getAccount().getAccId());
-			accountDto.setActive(project.getAccount().getIsActive());
-			accountDto.setLocationId(project.getAccount().getLocationId());
-			accountDto.setName(project.getAccount().getName());
-			accountDto.setStatus(project.getAccount().getStatus());
-			projectDto.setAccount(accountDto);
-			projectListDto.add(projectDto);
-		}
-		return projectListDto;
-	}
 }

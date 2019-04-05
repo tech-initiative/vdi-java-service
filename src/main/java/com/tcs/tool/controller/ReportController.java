@@ -33,7 +33,8 @@ import com.tcs.tool.service.AccountService;
 import com.tcs.tool.service.EmployeeService;
 import com.tcs.tool.service.ProjectService;
 import com.tcs.tool.service.TeamService;
-import com.tcs.tool.service.Transforms;
+import com.tcs.tool.transformer.AccountTransformer;
+import com.tcs.tool.transformer.ProjectTransformer;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -56,12 +57,15 @@ public class ReportController {
 	private AccountRepository accountrep;
 	
 	@Autowired
-	private Transforms transforms;
+	private AccountTransformer accountTransformer;
+
+	@Autowired
+	private ProjectTransformer projectTransformer;
 
 	@GetMapping("/accounts")
 	public List<AccountDto> listAccount() {
 		List<Account> accountList = accountService.findAllAccount();
-		return transforms.setAccountDetails(accountList);		
+		return accountTransformer.transformAccountResponse(accountList);		
 	}
 
 	@PostMapping("/accounts")
@@ -118,7 +122,7 @@ public class ReportController {
 	@GetMapping("/projects")
 	public List<ProjectDto> listProject() {
 		List<Project> projects = projectService.getAllProjects();
-		return transforms.setProjectDetails(projects);
+		return projectTransformer.transformProjectResponse(projects);
 	}
 
 	@PostMapping("/projects")

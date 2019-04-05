@@ -1,7 +1,5 @@
 package com.tcs.tool.angular.model;
 
-import com.tcs.tool.model.Account;
-
 public class ProjectDto {
 	private long projectId;
 	private String name;
