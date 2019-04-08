@@ -28,7 +28,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 	@Modifying
 	@Transactional
-	@Query(value="INSERT INTO USER_ROLE_MAPPING (PROJECT_ID, ROLE_ID, ACCOUNT_ID) VALUES (?2, 2, ?1)", nativeQuery = true)
+	@Query(value="INSERT INTO USER_ROLE_MAPPING (USER_ID, ROLE_ID, PROJECT_ID) VALUES (?2, 2, ?1)", nativeQuery = true)
 	void insertProjectMangerRole(long projectId, long tcsEmployeeId);
 
 	@Query(value="select e.* From EMPLOYEE e join USER_ROLE_MAPPING m on e.tcs_employee_id=m.user_id where m.role_id = 1 and m.account_id = ?1", nativeQuery=true)

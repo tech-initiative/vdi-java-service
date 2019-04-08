@@ -28,4 +28,6 @@ public interface EmployeeDao {
 
 	void insertProjectMangerRole(String projectId, long tcsEmployeeId);
 
+	List<Employee> findAllUser();
+
 }

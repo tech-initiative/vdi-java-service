@@ -24,4 +24,6 @@ public interface EmployeeService {
 	Employee editUser(@Valid Employee user);
 
 	void deleteUser(@Valid Employee user);
+
+	List<Employee> findAllUsers();
 }

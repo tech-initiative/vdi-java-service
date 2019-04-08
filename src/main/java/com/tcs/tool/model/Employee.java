@@ -24,8 +24,6 @@ public class Employee {
 	private String status;
 	private boolean isActive;
 	private boolean isAdmin;
-	private boolean isAccountManager;
-	private boolean isProjectManager;
 
 	@Id
 	@Column(name = "tcs_employee_id")
@@ -138,24 +136,6 @@ public class Employee {
 	
 	public void setIsAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
-	}
-
-	@Column(name="is_account_manager")
-	public boolean getIsAccountManager() {
-		return isAccountManager;
-	}
-
-	public void setIsAccountManager(boolean isAccountManager) {
-		this.isAccountManager = isAccountManager;
-	}
-
-	@Column(name="is_project_manager")
-	public boolean getIsProjectManager() {
-		return isProjectManager;
-	}
-
-	public void setIsProjectManager(boolean isProjectManager) {
-		this.isProjectManager = isProjectManager;
 	}
 	
 	@Override

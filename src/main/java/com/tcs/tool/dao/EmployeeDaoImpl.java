@@ -68,5 +68,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		userRepository.insertProjectMangerRole(new Long(projectId), tcsEmployeeId);
 	}
 
+	@Override
+	public List<Employee> findAllUser() {
+		return userRepository.findAll();
+	}
+
 
 }

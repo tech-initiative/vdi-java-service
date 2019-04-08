@@ -109,6 +109,11 @@ public class ReportController {
 		return employeeList;
 	}
 
+	@GetMapping("/users")
+	public List<Employee> listUser() {
+		return employeeService.findAllUsers();
+	}
+	
 	@PutMapping("/users")
 	public Employee editUser(@Valid @RequestBody Employee user) {
 		return employeeService.editUser(user);

@@ -66,4 +66,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public void deleteUser(@Valid Employee user) {
 		employeeDao.deleteUser(user);
 	}
+
+	@Override
+	public List<Employee> findAllUsers() {
+		return employeeDao.findAllUser();
+	}
 }
