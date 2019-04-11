@@ -1,5 +1,7 @@
 package com.tcs.tool.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -28,11 +31,12 @@ public class Project {
 	private boolean isActive;
 	@JsonView(View.Summary.class)
 	private Account account;
+	private List<Team> teamList;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="project_seq")
-	@SequenceGenerator(name="project_seq",sequenceName="project_SEQ")
-	@Column(name="project_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_seq")
+	@SequenceGenerator(name = "project_seq", sequenceName = "project_SEQ")
+	@Column(name = "project_id")
 	public long getProjectId() {
 		return projectId;
 	}
@@ -40,7 +44,6 @@ public class Project {
 	public void setProjectId(long projectId) {
 		this.projectId = projectId;
 	}
-
 
 	@Column(name = "name")
 	public String getName() {
@@ -79,7 +82,7 @@ public class Project {
 	}
 
 	@ManyToOne
-	@JoinColumn(name="fk_account")
+	@JoinColumn(name = "fk_account")
 	public Account getAccount() {
 		return account;
 	}
@@ -88,11 +91,19 @@ public class Project {
 		this.account = account;
 	}
 
+	@OneToMany(mappedBy = "project")
+	public List<Team> getTeamList() {
+		return teamList;
+	}
+
+	public void setTeamList(List<Team> teamList) {
+		this.teamList = teamList;
+	}
+
 	@Override
 	public String toString() {
-		return "Project [id=" + getProjectId() + ", name=" + name + ", accountId=" + accountId + ", status=" + status
-				+ ", isActive=" + isActive + ", teamList="  + ", ProjectManager=" 
-				+ ", account=" + account + "]";
+		return "Project [projectId=" + projectId + ", name=" + name + ", accountId=" + accountId + ", status=" + status
+				+ ", isActive=" + isActive + ", account=" + account + ", teamList=" + teamList + "]";
 	}
 
 }

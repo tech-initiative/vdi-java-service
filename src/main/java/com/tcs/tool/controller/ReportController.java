@@ -29,6 +29,7 @@ import com.tcs.tool.model.Project;
 import com.tcs.tool.model.Team;
 import com.tcs.tool.model.View;
 import com.tcs.tool.repository.AccountRepository;
+import com.tcs.tool.repository.ProjectRepository;
 import com.tcs.tool.service.AccountService;
 import com.tcs.tool.service.EmployeeService;
 import com.tcs.tool.service.ProjectService;
@@ -55,6 +56,9 @@ public class ReportController {
 	
 	@Autowired
 	private AccountRepository accountrep;
+	
+	@Autowired
+	private ProjectRepository projectrep;
 	
 	@Autowired
 	private AccountTransformer accountTransformer;
@@ -164,7 +168,10 @@ public class ReportController {
 	}
 
 	@PostMapping("/teams")
-	public Team addTeam(@Valid @RequestBody Team team) {
+	public Team addTeam(@Valid @RequestBody Team team) {		
+		Project project= projectrep.findById(new Long(team.getProjectId())).get();
+		project.getTeamList().add(team);
+		team.setProject(project);
 		Team teamDetails = teamService.addTeam(team);
 		return teamDetails;
 	}
